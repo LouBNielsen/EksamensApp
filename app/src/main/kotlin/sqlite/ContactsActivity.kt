@@ -1,6 +1,7 @@
 package sqlite
 
 import android.app.Activity
+import android.app.ListActivity
 import android.os.Bundle
 
 import kotlinx.android.synthetic.main.activity_contacts.*
@@ -16,16 +17,7 @@ class ContactsActivity : Activity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contacts)
 
-        println("i contakt aktivitet")
-        petList()
-
        buttonGoBack.onClick { finish() }
-
-    }
-
-    fun petList() {
-        println("petList metode")
-        PetsList.adapter = PetAdapter(DBCtrl.getPets())
 
     }
 

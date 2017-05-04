@@ -1,29 +1,20 @@
 package sqlite
 
 import android.app.Activity
-import android.app.Fragment
-import android.database.sqlite.SQLiteDatabase
+
 import android.os.Bundle
-import android.support.v4.app.FragmentActivity
 import android.util.Log
-import com.amitshekhar.DebugDB
+
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.onClick
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 
 class ActivityMain : Activity()
 {
 
-    val DBCtrl: DBController = DBController()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        DBCtrl.personQuery()
-        DBCtrl.petsQuery()
-        DBCtrl.contactsQuery()
+        Log.d("vetApp", "in activity main")
 
         registerPet.setOnClickListener {
             toast("register")
@@ -38,23 +29,25 @@ class ActivityMain : Activity()
         goToSendSMS.onClick {
             startActivity(intentFor<SendSMS>())
         }
-
     }
 
         fun registerThisPet(){
+            Log.d("vetApp", "in register pets")
             val fName = firstName.text.toString()
             val type = type.text.toString()
 
-            DBCtrl.insertPet(fName, type)
+            DBController.instance.insertPet(fName, type)
         }
 
         fun registerThisPerson(){
+            Log.d("vetApp", "in register pers")
             val fName = pFirstName.text.toString()
             val lName = pLastName.text.toString()
             val age = pAge.text.toString()
             val email = pEmail.text.toString()
+            val number = pNumber.text.toString()
 
-            DBCtrl.insertPerson(fName, lName, age, email)
+            DBController.instance.insertPerson(fName, lName, age, email, number)
         }
 
 

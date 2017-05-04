@@ -26,7 +26,7 @@
             android:textStyle="bold" />
 
         <ListView
-            android:id="@+id/PetsList"
+            android:id="@+id/listView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:choiceMode="singleChoice"

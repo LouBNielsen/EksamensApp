@@ -7,7 +7,8 @@ data class Pers(
         var firstName: String,
         var lastName: String,
         var age: Int,
-        var email: String
+        var email: String,
+        var number: Int
 ) : Serializable
 
 object PersTable {
@@ -17,4 +18,5 @@ object PersTable {
     val lastName = "lastName"
     val age = "age"
     val email = "email"
+    val number = "number"
 }

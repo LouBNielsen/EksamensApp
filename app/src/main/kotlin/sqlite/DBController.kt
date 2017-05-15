@@ -13,7 +13,7 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
 
     companion object {
         val DB_NAME = "VETDB"
-        val DB_VERSION = 3
+        val DB_VERSION = 4
         val instance by lazy { DBController() }
     }
 
@@ -42,6 +42,10 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
         Log.d("vetApp", "in on upgrade")
         db.dropTable(PersTable.name)
         db.dropTable(PetsTable.name)
+        if(oldVersion == 3)
+        {
+            db.dropTable("contacts")
+        }
         onCreate(db)
     }
 
@@ -94,6 +98,18 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
                 PetsTable.firstName to firstName,
                 PetsTable.type to type
         ) }
+    }
+
+    fun listPeople() : List<Pers> {
+        var person = listOf<Pers>()
+        instance.use {
+            person = select(PersTable.firstName, PersTable.number).parseList(
+                    rowParser {
+                        id: Int, firstName: String, lastName: String, age: Int, email: String, number: Int ->
+                        Pers(id, firstName, lastName, age, email, number)
+                    })
+        }
+        return person
     }
 }
 

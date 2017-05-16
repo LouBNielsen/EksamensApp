@@ -14,8 +14,6 @@ class ContactsActivity : Activity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contacts)
 
-        DBController.instance.listPeople();
-
         buttonGoBack.onClick { finish() }
 
     }

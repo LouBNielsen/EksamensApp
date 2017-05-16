@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#c8e6f7"
     tools:context="sqlite.ActivityMain">
 
     <LinearLayout
@@ -81,11 +82,11 @@
             android:layout_below="@+id/pNumber"/>
 
         <Button
-            android:id="@+id/goToSendSMS"
+            android:id="@+id/goBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:text="GO TO SEND SMS"
+            android:text="GO BACK"
             android:layout_below="@+id/registerPers"/>
 
 

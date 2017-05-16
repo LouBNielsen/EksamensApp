@@ -26,8 +26,8 @@ class ActivityMain : Activity()
             registerThisPerson()
         }
 
-        goToSendSMS.onClick {
-            startActivity(intentFor<SendSMS>())
+        goBackButton.onClick {
+            finish()
         }
     }
 

@@ -49,7 +49,4 @@ class ActivityMain : Activity()
 
             DBController.instance.insertPerson(fName, lName, age, email, number)
         }
-
-
-
 }

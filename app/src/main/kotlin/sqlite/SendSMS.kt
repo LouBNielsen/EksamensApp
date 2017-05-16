@@ -27,5 +27,5 @@ class SendSMS : Activity() {
 
         buttonGoBack.onClick { finish() }
     }
-
 }
+

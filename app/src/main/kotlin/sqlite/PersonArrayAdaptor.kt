@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.person_item.view.*
-
+/*
 
 class PersonArrayAdapter(context: Context, people: List<Pers>) :
         ArrayAdapter<Pers>(context, 0, people) {
@@ -25,4 +25,6 @@ class PersonArrayAdapter(context: Context, people: List<Pers>) :
         return template
 
     }
+
 }
+        */

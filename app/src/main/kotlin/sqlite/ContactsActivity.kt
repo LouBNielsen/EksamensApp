@@ -14,6 +14,7 @@ class ContactsActivity : Activity()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contacts)
 
+
         buttonGoBack.onClick { finish() }
 
     }

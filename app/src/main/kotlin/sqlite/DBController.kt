@@ -19,6 +19,7 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
 
     override fun onCreate(db: SQLiteDatabase) {
         Log.d("vetApp", "in oncreate")
+
         db.createTable(
                 PersTable.name, true,
                 PersTable.id to INTEGER + PRIMARY_KEY,

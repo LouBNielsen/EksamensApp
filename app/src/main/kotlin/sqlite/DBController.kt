@@ -104,12 +104,13 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
     fun listPeople() : List<Pers> {
         var person = listOf<Pers>()
         instance.use {
-            person = select(PersTable.firstName, PersTable.number).parseList(
+            person = select(PersTable.name).parseList(
                     rowParser {
                         id: Int, firstName: String, lastName: String, age: Int, email: String, number: Int ->
                         Pers(id, firstName, lastName, age, email, number)
                     })
         }
+        Log.i("DBC", "People: ${person.size}")
         return person
     }
 }

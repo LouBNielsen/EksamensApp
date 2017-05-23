@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme"
         android:name=".App">
         <activity
-            android:name="sqlite.HomescreenActivity"
+            android:name=".HomescreenActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,10 +19,11 @@
             </intent-filter>
         </activity>
         <receiver android:name=".SmsReceiver" android:exported="true" >
-            <intent-filter android:priority="2147483647" >
+            <intent-filter android:priority="0" >
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
+
         <activity android:name=".SendSMS"></activity>
         <activity android:name=".ContactsActivity"></activity>
         <activity android:name=".ActivityMain"></activity>

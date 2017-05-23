@@ -101,6 +101,15 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
         ) }
     }
 
+    fun insertPetFromSMS(firstName: String, type: String){
+        instance.use {
+            insert(
+                    PetsTable.name,
+                    PetsTable.firstName to firstName,
+                    PetsTable.type to type
+            ) }
+    }
+
     fun listPeople() : List<Pers> {
         var person = listOf<Pers>()
         instance.use {

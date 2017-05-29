@@ -7,40 +7,45 @@ import android.os.Build
 import android.support.annotation.RequiresApi
 import android.telephony.SmsMessage
 import org.jetbrains.anko.toast
+import android.widget.Toast
+import android.support.v4.app.NotificationCompat.getExtras
+import android.os.Bundle
+import android.util.Log
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.longToast
+import org.jetbrains.anko.newTask
+import java.io.IOException
 
 
-class SmsReceiver: BroadcastReceiver() {
-
-    //@RequiresApi(Build.VERSION_CODES.M)
+class SmsReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
-        val intentExtras = intent.extras
-        context.toast("Uhh")
-        if (intentExtras != null) {
-            val format = intentExtras.getString("format")
-            val sms = intentExtras.get("pdus") as Array<Any>
-            context.toast("Før ${sms.size}")
-            for (i in sms.indices) {
 
-                val smsMessage = SmsMessage.createFromPdu(sms[i] as ByteArray, format)
+        val extras = intent.extras ?: return
+        val pdus = extras.get("pdus") as Array<Any>
 
-                val message = smsMessage.messageBody
-                context.toast("hej")
-                val parts = message.split(";")
-                /*if(message.startsWith("#NEWPET")){
-                    val name = parts[1]
-                    val type = parts[2]
-                    DBController.instance.insertPetFromSMS(name, type)
-                    Toast.makeText(context, "New pet has been added: " + name + type, Toast.LENGTH_SHORT).show()
-                } else
-                    */
-                    if(message.startsWith("#MEETING")){
+        for (pdu in pdus) {
+            val sms = SmsMessage.createFromPdu(pdu as ByteArray)
+            val body = sms.messageBody
+            val parts = body.split(";")
+
+            try {
+                if (body.startsWith("#MEETING")) {
                     val place = parts[1]
                     val time = parts[2]
-                    context.toast("There is a meeting: $place $time")
+                    context.toast("There is a meeting at: $place $time")
+                    abortBroadcast()
+                } else if (body.startsWith("#NEWPET")) {
+                    val name = parts[1]
+                    val type = parts[2]
+                    context.toast("A new pet has been born: $name $type")
+                    abortBroadcast()
+                } else {
+                    context.toast("$body")
                 }
+            } catch (exception : IOException){
+                Log.d("", exception.toString())
             }
         }
     }
-
 }

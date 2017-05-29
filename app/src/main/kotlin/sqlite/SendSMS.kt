@@ -15,15 +15,15 @@ class SendSMS : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sms)
 
+        // sendSMS: build-in sms manager
         buttonSendSMS1.onClick { sendSMS(phonenumber.text.toString(), message.text.toString()) }
 
         buttonSendSMS2.onClick {
             val number = "41100532"
-            val text = "Jeg sender en anden sms"
+            val text = "#MEETING"
             sendSMS(number, text) }
 
-        contacts.onClick { startActivity(intentFor<ContactsActivity>())
-        }
+        contacts.onClick { startActivity(intentFor<ContactsActivity>()) }
 
         buttonGoBack.onClick { finish() }
     }

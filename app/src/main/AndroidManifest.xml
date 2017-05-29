@@ -18,8 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".SmsReceiver" android:exported="true" >
-            <intent-filter android:priority="0" >
+        <receiver
+            android:name=".SmsReceiver"
+            android:exported="true">
+            <intent-filter android:priority="0">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
@@ -27,6 +29,7 @@
         <activity android:name=".SendSMS"></activity>
         <activity android:name=".ContactsActivity"></activity>
         <activity android:name=".ActivityMain"></activity>
+
 
 
 

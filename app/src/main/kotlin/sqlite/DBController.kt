@@ -2,24 +2,30 @@ package sqlite
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-
-import android.util.Log
-import org.jetbrains.anko.AnkoLogger
+import android.widget.Toast
 import org.jetbrains.anko.db.*
+import org.jetbrains.anko.toast
 import org.jetbrains.anko.debug
+import org.jetbrains.anko.AnkoLogger
 
 
-class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelper(context, DBController.DB_NAME, null, DBController.DB_VERSION), AnkoLogger {
 
+// C:\Users\LouiseB\AppData\Local\Android\sdk\platform-tools
+// slet DB - adb shell
+// data/data/sqlite.app/databases rm VETDB
+
+class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelper(context, DBController.DB_NAME, null, DBController.DB_VERSION), AnkoLogger  {
+    //ManagedSQLiteOpenHelper: helper class til database oprettelse
+
+    // companion object: Kotlin har ikke statiske metoder.. løsning --> companion object
     companion object {
         val DB_NAME = "VETDB"
-        val DB_VERSION = 4
-        val instance by lazy { DBController() }
+        val DB_VERSION = 5
+        val instance by lazy { DBController() } //delegated property.. Instantieret ved første kald
     }
 
-    override fun onCreate(db: SQLiteDatabase) {
-        Log.d("vetApp", "in oncreate")
-
+    override fun onCreate(db: SQLiteDatabase) { // oprettelse af database og tables første gang
+    debug("in on create")
         db.createTable(
                 PersTable.name, true,
                 PersTable.id to INTEGER + PRIMARY_KEY,
@@ -39,22 +45,22 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
         insertData(db)
     }
 
-    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        Log.d("vetApp", "in on upgrade")
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) { //upgrader til ny schema version
+        debug("in onUpgrade")
         db.dropTable(PersTable.name)
         db.dropTable(PetsTable.name)
-        if(oldVersion == 3)
-        {
-            db.dropTable("contacts")
-        }
         onCreate(db)
     }
 
-    override fun onDowngrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+    override fun onDowngrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) { // kan downgrades igen
+        debug("in onDowngrade")
+        db.dropTable(PersTable.name)
+        db.dropTable(PetsTable.name)
+        onCreate(db)
     }
 
-    fun insertData(db: SQLiteDatabase) {
-        Log.d("vetApp", "in insert data")
+    fun insertData(db: SQLiteDatabase) { //NOTE, INSTANCE.USE ELLER DB.INSERT??????
+        debug("in insertData")
 
         db.insert(
                 PersTable.name,
@@ -77,8 +83,9 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
     }
 
     fun insertPerson(firstName: String, lastName: String, age: String, email: String, number: String){
+        debug("in insertPerson")
 
-        instance.use {
+        instance.use { //brug DBController instans og indsæt person
             insert(
                 PersTable.name,
                 PersTable.firstName to firstName,
@@ -87,18 +94,21 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
                 PersTable.email to email,
                 PersTable.number to number
         ) }
+        context.toast("Person er registreret")
     }
 
 
     fun insertPet(firstName: String, type: String){
-        debug("in  insertPet")
+        debug("in insertPet")
 
-        instance.use {
+        instance.use { //brug DBController instans og indsæt pet
             insert(
                 PetsTable.name,
                 PetsTable.firstName to firstName,
                 PetsTable.type to type
         ) }
+        context.toast("Pet er registreret")
+
     }
 
     fun insertPetFromSMS(firstName: String, type: String){
@@ -111,15 +121,18 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
     }
 
     fun listPeople() : List<Pers> {
+        debug("in insertListPeople")
+
         var person = listOf<Pers>()
         instance.use {
+            debug("in select personTable")
+
             person = select(PersTable.name).parseList(
                     rowParser {
                         id: Int, firstName: String, lastName: String, age: Int, email: String, number: Int ->
                         Pers(id, firstName, lastName, age, email, number)
                     })
         }
-        Log.i("DBC", "People: ${person.size}")
         return person
     }
 }

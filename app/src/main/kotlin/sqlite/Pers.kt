@@ -2,14 +2,14 @@ package sqlite
 
 import java.io.Serializable
 
-data class Pers(
-        val id: Int,
+data class Pers( // data class: holder data.
+        val id: Int, // var mutable, val immutable
         var firstName: String,
         var lastName: String,
         var age: Int,
         var email: String,
         var number: Int
-) : Serializable
+) : Serializable // serializable - kan persisteres
 
 object PersTable {
     val name = "pers"
@@ -20,3 +20,5 @@ object PersTable {
     val email = "email"
     val number = "number"
 }
+
+

@@ -6,7 +6,6 @@ package sqlite
 import java.io.Serializable
 
 data class Pets(
-        val id: Int,
         var firstName: String,
         var type: String
 

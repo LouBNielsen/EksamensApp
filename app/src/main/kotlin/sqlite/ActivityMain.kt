@@ -9,6 +9,9 @@ import org.jetbrains.anko.*
 
 class ActivityMain : Activity()
 {
+    companion object {
+        val instance by lazy { ActivityMain() } //delegated property.. Instantieret ved første kald
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

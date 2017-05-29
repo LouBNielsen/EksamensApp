@@ -11,9 +11,11 @@ import android.widget.Toast
 import android.support.v4.app.NotificationCompat.getExtras
 import android.os.Bundle
 import android.util.Log
+import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.longToast
 import org.jetbrains.anko.newTask
+import sqlite.PetsTable.id
 import java.io.IOException
 
 
@@ -38,7 +40,12 @@ class SmsReceiver : BroadcastReceiver() {
                 } else if (body.startsWith("#NEWPET")) {
                     val name = parts[1]
                     val type = parts[2]
+
+                    var pet = Pets(name, type)
+                    DBController.instance.insertPetFromSMS(pet)
+
                     context.toast("A new pet has been born: $name $type")
+
                     abortBroadcast()
                 } else {
                     context.toast("$body")

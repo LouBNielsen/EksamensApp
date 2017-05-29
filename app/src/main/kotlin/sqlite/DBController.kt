@@ -111,13 +111,17 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
 
     }
 
-    fun insertPetFromSMS(firstName: String, type: String){
-        instance.use {
+    fun insertPetFromSMS(pet : Pets){
+        debug("in insertPet")
+
+        instance.use { //brug DBController instans og indsæt pet
             insert(
                     PetsTable.name,
-                    PetsTable.firstName to firstName,
-                    PetsTable.type to type
+                    PetsTable.firstName to pet.firstName,
+                    PetsTable.type to pet.type
             ) }
+        context.toast("Pet er registreret")
+
     }
 
     fun listPeople() : List<Pers> {
@@ -129,8 +133,8 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
 
             person = select(PersTable.name).parseList(
                     rowParser {
-                        id: Int, firstName: String, lastName: String, age: Int, email: String, number: Int ->
-                        Pers(id, firstName, lastName, age, email, number)
+                        firstName: String, lastName: String, age: Int, email: String, number: Int ->
+                        Pers(firstName, lastName, age, email, number)
                     })
         }
         return person

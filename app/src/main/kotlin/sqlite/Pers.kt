@@ -3,7 +3,6 @@ package sqlite
 import java.io.Serializable
 
 data class Pers( // data class: holder data.
-        val id: Int, // var mutable, val immutable
         var firstName: String,
         var lastName: String,
         var age: Int,

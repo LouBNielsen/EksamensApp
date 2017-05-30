@@ -17,7 +17,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/firstName"
+            android:id="@+id/person_firstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Name"
@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Type"
-            android:layout_below="@+id/firstName"/>
+            android:layout_below="@+id/person_firstName"/>
 
         <Button
             android:id="@+id/registerPet"

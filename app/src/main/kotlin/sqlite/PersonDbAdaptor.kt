@@ -14,9 +14,8 @@ class PersonDbAdapter(val people: List<Pers>) : RecyclerView.Adapter<PersonDbAda
     // adapter: bro mellem view og data
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) : ViewHolder {
-        debug("in onCreateViewHolder personDbAdaptert")
         // viewGroup: view som kan indeholde children views
-    // viewHolder: selve item viewet og dets placering i RecyclerViewet
+        // viewHolder: selve item viewet og dets placering i RecyclerViewet
 
         val view = LayoutInflater //konverterer person_item layout file til det tilsvarende ViewGroup (parent)
                 .from(parent.context)
@@ -26,11 +25,10 @@ class PersonDbAdapter(val people: List<Pers>) : RecyclerView.Adapter<PersonDbAda
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) { //vis data
-        debug("in onBindViewHolder")
         val person = people[position] //position af data item inde i adapteren
-        holder.view.firstName.text = person.firstName
-        holder.view.lastName.text = person.lastName
-        holder.view.number.text = person.number.toString()
+        holder.view.person_firstName.text = person.firstName
+        holder.view.person_lastName.text = person.lastName
+        holder.view.person_number.text = person.number.toString()
     }
 
     override fun getItemCount() = people.size

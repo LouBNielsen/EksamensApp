@@ -32,7 +32,7 @@ class ActivityMain : Activity()
 
         fun registerThisPet(){
             //værdier fra textFields (layout activity_main)
-            val fName = firstName.text.toString()
+            val fName = person_firstName.text.toString()
             val type = type.text.toString()
 
             DBController.instance.insertPet(fName, type) //puttes i DB

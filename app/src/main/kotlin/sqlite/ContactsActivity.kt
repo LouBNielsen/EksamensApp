@@ -1,16 +1,19 @@
 package sqlite
 
-import android.app.Activity
+import android.app.ListActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import android.widget.ArrayAdapter
+import android.widget.ListView
+import android.widget.Toast
 
 import kotlinx.android.synthetic.main.activity_contacts.*
+import kotlinx.android.synthetic.main.activity_sms.*
+import kotlinx.android.synthetic.main.person_item.*
+import kotlinx.android.synthetic.main.person_item.view.*
 import org.jetbrains.anko.*
 
 
-class ContactsActivity : Activity(), AnkoLogger
+class ContactsActivity : ListActivity(), AnkoLogger
 {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,15 +21,22 @@ class ContactsActivity : Activity(), AnkoLogger
 
        // peopleList.layoutManager = LinearLayoutManager(this)
 
-        buttonGoBack.onClick { finish() }
+       buttonGoBackTo.onClick { finish() }
+
     }
+
 
         override fun onResume() {
             super.onResume()
             //peopleList.adapter = PersonDbAdapter(DBController.instance.listPeople())
-            personListView.adapter = PersonAdapter(DBController.instance.getAdapterLocations())
+            list.adapter = PersonAdapter(DBController.instance.getAdapterLocations())
 
         }
 
+    override fun onListItemClick(l: ListView, v: View?, position: Int, id: Long) {
+        val number = list.getChildAt(position).person_number.text
+        Toast.makeText(this, "" + number, Toast.LENGTH_LONG).show()
+        startActivity(intentFor<SendSMS>())
+    }
 
 }

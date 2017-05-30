@@ -15,17 +15,18 @@ class ContactsActivity : Activity(), AnkoLogger
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_contacts)
-        debug("in onCreate Contactsinfo before peoplelist")
 
-        peopleList.layoutManager = LinearLayoutManager(this)
+       // peopleList.layoutManager = LinearLayoutManager(this)
 
         buttonGoBack.onClick { finish() }
     }
 
         override fun onResume() {
             super.onResume()
-            debug("in onResume Contactsinfo in peoplelist.adapter")
-            peopleList.adapter = PersonDbAdapter(DBController.instance.listPeople())
+            //peopleList.adapter = PersonDbAdapter(DBController.instance.listPeople())
+            personListView.adapter = PersonAdapter(DBController.instance.getAdapterLocations())
 
         }
+
+
 }

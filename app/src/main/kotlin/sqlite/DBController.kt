@@ -18,6 +18,9 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
     //ManagedSQLiteOpenHelper: helper class til database oprettelse
 
     // companion object: Kotlin har ikke statiske metoder.. løsning --> companion object
+
+    lateinit var db: SQLiteDatabase
+
     companion object {
         val DB_NAME = "VETDB"
         val DB_VERSION = 5
@@ -101,6 +104,8 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
     fun insertPet(firstName: String, type: String){
         debug("in insertPet")
 
+        db = writableDatabase
+
         instance.use { //brug DBController instans og indsæt pet
             insert(
                 PetsTable.name,
@@ -114,6 +119,8 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
     fun insertPetFromSMS(pet : Pets){
         debug("in insertPet")
 
+        db = writableDatabase
+
         instance.use { //brug DBController instans og indsæt pet
             insert(
                     PetsTable.name,
@@ -124,6 +131,21 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
 
     }
 
+
+    fun getAdapterLocations(): List<Map<String, Any?>> {
+
+        db = readableDatabase
+
+        return db.select(PersTable.name).exec {
+            parseList(
+                    object : MapRowParser<Map<String, Any?>> {
+                        override fun parseRow(columns: Map<String, Any?>): Map<String, Any?> {
+                            return columns
+                        }
+                    })
+        }
+    }
+/*
     fun listPeople() : List<Pers> {
         debug("in insertListPeople")
 
@@ -133,11 +155,12 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
 
             person = select(PersTable.name).parseList(
                     rowParser {
-                        firstName: String, lastName: String, age: Int, email: String, number: Int ->
-                        Pers(firstName, lastName, age, email, number)
+                        id: Int, firstName: String, lastName: String, age: Int, email: String, number: Int ->
+                        Pers(id, firstName, lastName, age, email, number)
                     })
         }
         return person
     }
+    */
 }
 

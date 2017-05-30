@@ -41,8 +41,8 @@ class SmsReceiver : BroadcastReceiver() {
                     val name = parts[1]
                     val type = parts[2]
 
-                    var pet = Pets(name, type)
-                    DBController.instance.insertPetFromSMS(pet)
+                    //var pet = Pets(name, type)
+                    DBController.instance.insertPet(name, type)
 
                     context.toast("A new pet has been born: $name $type")
 

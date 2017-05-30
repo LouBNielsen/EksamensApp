@@ -19,7 +19,8 @@ class SendSMS : Activity() {
         buttonSendSMS1.onClick { sendSMS(phonenumber.text.toString(), message.text.toString()) }
 
         buttonSendSMS2.onClick {
-            val number = "41100532"
+
+            val number = "41100532" //Hvad vi har klikket på i contacts
             val text = "#MEETING"
             sendSMS(number, text) }
 

@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="94dp"
-        android:text="HELLO Med denne app kan du arrangere møder med andre dyreejere. Du skal blot sende en sms til personen du vil gå tur med, hvor du vil mødes og hvad tid. Du finder alle dyreejere under kontakter. Send en SMS med teksten: #MEETING;PLACE;TIME Du kan også fortælle de andre dyreejere, at dit kæledyr har fået unger. Send en SMS med teksten: #NEWPET;NAME;TYPE"
+        android:text="Med denne app kan du arrangere møder med andre dyreejere. Du skal blot sende en sms til personen du vil gå tur med, hvor du vil mødes og hvad tid. Du finder alle dyreejere under kontakter. Send en SMS med teksten: #MEETING;PLACE;TIME Du kan også fortælle de andre dyreejere, at dit kæledyr har fået unger. Send en SMS med teksten: #NEWPET;NAME;TYPE"
         android:layout_below="@+id/headline"
         android:layout_centerHorizontal="true" />
 

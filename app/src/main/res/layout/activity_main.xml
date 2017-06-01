@@ -17,69 +17,69 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/person_firstName"
+            android:id="@+id/petName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Name"
             android:layout_below="@+id/buttonSQLite"/>
 
         <EditText
-            android:id="@+id/type"
+            android:id="@+id/petType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Type"
-            android:layout_below="@+id/person_firstName"/>
+            android:layout_below="@+id/petName"/>
 
         <Button
-            android:id="@+id/registerPet"
+            android:id="@+id/registerPetButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="Register pet"
-            android:layout_below="@+id/type"/>
+            android:layout_below="@+id/petType"/>
 
         <EditText
-            android:id="@+id/pFirstName"
+            android:id="@+id/personFirstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Firstname"
-            android:layout_below="@+id/registerPet"/>
+            android:layout_below="@+id/registerPetButton"/>
 
         <EditText
-            android:id="@+id/pLastName"
+            android:id="@+id/personLastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Lastname"
-            android:layout_below="@+id/pFirstName"/>
+            android:layout_below="@+id/personFirstName"/>
 
         <EditText
-            android:id="@+id/pAge"
+            android:id="@+id/personAge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Age"
             android:layout_below="@+id/pLastname"/>
 
         <EditText
-            android:id="@+id/pEmail"
+            android:id="@+id/personEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Email"
-            android:layout_below="@+id/pAge"/>
+            android:layout_below="@+id/personAge"/>
 
         <EditText
-            android:id="@+id/pNumber"
+            android:id="@+id/personNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Number"
-            android:layout_below="@+id/pEmail"/>
+            android:layout_below="@+id/personEmail"/>
 
         <Button
-            android:id="@+id/registerPers"
+            android:id="@+id/registerPersonButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="Register person"
-            android:layout_below="@+id/pNumber"/>
+            android:layout_below="@+id/personNumber"/>
 
         <Button
             android:id="@+id/goBackButton"
@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:text="GO BACK"
-            android:layout_below="@+id/registerPers"/>
+            android:layout_below="@+id/registerPersonButton"/>
 
 
     </LinearLayout>

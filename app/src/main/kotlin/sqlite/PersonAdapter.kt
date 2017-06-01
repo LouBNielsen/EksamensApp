@@ -4,23 +4,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import kotlinx.android.synthetic.main.person_item.view.*
 
 
-
-class PersonAdapter(var listPeople : List<Map<String, Any?>>) : BaseAdapter(){
+class PersonAdapter(var listPeople : List<Map<String, Any?>>) : BaseAdapter(){ //Adapter binder view og data
 
     override fun getView(position: Int, view: View?, viewGroup: ViewGroup?): View {
-        val viewPersonList = LayoutInflater.from(App.instance).inflate(R.layout.person_item, viewGroup, false)
+        //view indeholder viewGroup
+        //viewGroup indeholder children views. view container
 
-        val textViewFirstName = viewPersonList.findViewById(R.id.person_firstName) as TextView
-        val textViewLastName = viewPersonList.findViewById(R.id.person_lastName) as TextView
-        val textViewNumber = viewPersonList.findViewById(R.id.person_number) as TextView
+        //LayoutInflater: XML fil konvertering til View objekter
+        val viewPersonList = LayoutInflater.from(App.instance).inflate(R.layout.person_item, viewGroup, false)
 
         val item = getItem(position)
 
-        textViewFirstName.text = item["firstName"].toString()
-        textViewLastName.text = item["lastName"].toString()
-        textViewNumber.text = item["number"].toString()
+        //view objekter til db objekter
+        viewPersonList.person_firstName.text = item["firstName"].toString()
+        viewPersonList.person_lastName.text = item["lastName"].toString()
+        viewPersonList.person_number.text = item["number"].toString()
+
 
         return viewPersonList
     }

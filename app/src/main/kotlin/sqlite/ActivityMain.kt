@@ -9,19 +9,16 @@ import org.jetbrains.anko.*
 
 class ActivityMain : Activity()
 {
-    companion object {
-        val instance by lazy { ActivityMain() } //delegated property.. Instantieret ved første kald
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        registerPet.onClick {
+        registerPetButton.onClick {
             registerThisPet()
         }
 
-        registerPers.onClick {
+        registerPersonButton.onClick {
             registerThisPerson()
         }
 
@@ -31,21 +28,19 @@ class ActivityMain : Activity()
     }
 
         fun registerThisPet(){
-            //værdier fra textFields (layout activity_main)
-            val fName = person_firstName.text.toString()
-            val type = type.text.toString()
+            val name = petName.text.toString()
+            val type = petType.text.toString()
 
-            DBController.instance.insertPet(fName, type) //puttes i DB
+            DBController.instance.insertPet(name, type)
         }
 
         fun registerThisPerson(){
-            //værdier fra textFields (layout activity_main)
-            val fName = pFirstName.text.toString()
-            val lName = pLastName.text.toString()
-            val age = pAge.text.toString()
-            val email = pEmail.text.toString()
-            val number = pNumber.text.toString()
+            val firstName = personFirstName.text.toString()
+            val lastName = personLastName.text.toString()
+            val age = personAge.text.toString()
+            val email = personEmail.text.toString()
+            val number = personNumber.text.toString()
 
-            DBController.instance.insertPerson(fName, lName, age, email, number) //puttes i DB
+            DBController.instance.insertPerson(firstName, lastName, age, email, number)
         }
 }

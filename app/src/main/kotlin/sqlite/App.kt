@@ -14,13 +14,11 @@ class App : Application() {
 }
 
 
-    // lateinit: initialiser en property, men dens state er endnu ikke tilgængelig..
-    //           hvis værdi requestes før assignment --> exception
-    //           lateinit kræver 'var'.. problem.. vi kan ændre værdien af instancen...
-    //           løsning: 'private set'
-
-    // delegate: properties med genbrugelig ædfærd.
-    //           lazy, observable, values from a map
+    // lateinit:
+    //              delegated property
+    //              initialiser App inden dens dens state er tilgængelig / non-null type
+    //              problem: ' var ' / companion object
+    //              løsning: ' private set '
 
 
 

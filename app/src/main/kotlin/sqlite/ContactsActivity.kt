@@ -7,8 +7,6 @@ import android.widget.ListView
 import android.widget.Toast
 
 import kotlinx.android.synthetic.main.activity_contacts.*
-import kotlinx.android.synthetic.main.activity_sms.*
-import kotlinx.android.synthetic.main.person_item.*
 import kotlinx.android.synthetic.main.person_item.view.*
 import org.jetbrains.anko.*
 
@@ -29,7 +27,7 @@ class ContactsActivity : ListActivity(), AnkoLogger
         override fun onResume() {
             super.onResume()
             //peopleList.adapter = PersonDbAdapter(DBController.instance.listPeople())
-            list.adapter = PersonAdapter(DBController.instance.getAdapterLocations())
+            list.adapter = PersonAdapter(DBController.instance.getAdapter())
 
         }
 

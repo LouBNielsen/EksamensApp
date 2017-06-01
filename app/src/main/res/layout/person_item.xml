@@ -24,7 +24,7 @@
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/person_firstName"
+        android:layout_toRightOf="@id/petName"
         android:textColor="#45484c"
         android:layout_marginLeft="10dp"
         android:textSize="24sp"

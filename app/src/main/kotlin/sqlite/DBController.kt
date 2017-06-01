@@ -11,24 +11,18 @@ import org.jetbrains.anko.AnkoLogger
 
 
 // C:\Users\LouiseB\AppData\Local\Android\sdk\platform-tools
-// slet DB - adb shell
-// data/data/sqlite.app/databases rm VETDB
 
 class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelper(context, DBController.DB_NAME, null, DBController.DB_VERSION), AnkoLogger  {
-    //ManagedSQLiteOpenHelper: helper class til database oprettelse
+    //ManagedSQLiteOpenHelper
 
-    // companion object: Kotlin har ikke statiske metoder.. løsning --> companion object
+    companion object { // Kotlin ingen statiske metoder
 
-    lateinit var db: SQLiteDatabase
-
-    companion object {
         val DB_NAME = "VETDB"
-        val DB_VERSION = 5
+        val DB_VERSION = 6
         val instance by lazy { DBController() } //delegated property.. Instantieret ved første kald
     }
 
     override fun onCreate(db: SQLiteDatabase) { // oprettelse af database og tables første gang
-    debug("in on create")
         db.createTable(
                 PersTable.name, true,
                 PersTable.id to INTEGER + PRIMARY_KEY,
@@ -48,22 +42,20 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
         insertData(db)
     }
 
-    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) { //upgrader til ny schema version
-        debug("in onUpgrade")
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
+
         db.dropTable(PersTable.name)
         db.dropTable(PetsTable.name)
         onCreate(db)
     }
 
-    override fun onDowngrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) { // kan downgrades igen
-        debug("in onDowngrade")
+    override fun onDowngrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.dropTable(PersTable.name)
         db.dropTable(PetsTable.name)
         onCreate(db)
     }
 
-    fun insertData(db: SQLiteDatabase) { //NOTE, INSTANCE.USE ELLER DB.INSERT??????
-        debug("in insertData")
+    fun insertData(db: SQLiteDatabase) {
 
         db.insert(
                 PersTable.name,
@@ -86,9 +78,8 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
     }
 
     fun insertPerson(firstName: String, lastName: String, age: String, email: String, number: String){
-        debug("in insertPerson")
 
-        instance.use { //brug DBController instans og indsæt person
+        instance.use {
             insert(
                 PersTable.name,
                 PersTable.firstName to firstName,
@@ -102,11 +93,8 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
 
 
     fun insertPet(firstName: String, type: String){
-        debug("in insertPet")
 
-        db = writableDatabase
-
-        instance.use { //brug DBController instans og indsæt pet
+        instance.use {
             insert(
                 PetsTable.name,
                 PetsTable.firstName to firstName,
@@ -116,23 +104,8 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
 
     }
 
-    fun insertPetFromSMS(pet : Pets){
-        debug("in insertPet")
-
-        db = writableDatabase
-
-        instance.use { //brug DBController instans og indsæt pet
-            insert(
-                    PetsTable.name,
-                    PetsTable.firstName to pet.firstName,
-                    PetsTable.type to pet.type
-            ) }
-        context.toast("Pet er registreret")
-
-    }
-
-
-    fun getAdapterLocations(): List<Map<String, Any?>> {
+    lateinit var db: SQLiteDatabase
+    fun getAdapter(): List<Map<String, Any?>> {
 
         db = readableDatabase
 
@@ -145,9 +118,25 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
                     })
         }
     }
-/*
+
+
+
+    fun insertPetFromSMS(pet : Pets){
+        debug("in insertPetFromSMS")
+
+        db = writableDatabase
+
+        instance.use {
+            insert(
+                    PetsTable.name,
+                    PetsTable.firstName to pet.firstName,
+                    PetsTable.type to pet.type
+            ) }
+        context.toast("Pet er registreret")
+
+    }
+
     fun listPeople() : List<Pers> {
-        debug("in insertListPeople")
 
         var person = listOf<Pers>()
         instance.use {
@@ -161,6 +150,6 @@ class DBController(var context: Context = App.instance) : ManagedSQLiteOpenHelpe
         }
         return person
     }
-    */
+
 }
 
